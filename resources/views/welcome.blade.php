@@ -8,7 +8,7 @@
         <div class="col-md-8 mx-auto text-center">
           <!-- <span class="badge badge-primary badge-pill mb-3">Insight</span> -->
           <h4 class="display-3">Produk Terbaru</h4>
-          <p class="lead">Lorem ipsum dolor sit amet.</p>
+          <p class="lead"></p>
         </div>
       </div>
 

@@ -31,15 +31,9 @@
           </a>
         </li>
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link" href="#" role="button">
+          <a href="{{route('history')}}" class="nav-link" role="button">
             <i class="ni ni-ui-04 d-lg-none"></i>
-            <span class="nav-link-inner--text">Tentang Kami</span>
-          </a>
-        </li>
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link" href="#" role="button">
-            <i class="ni ni-ui-04 d-lg-none"></i>
-            <span class="nav-link-inner--text">Hubungi Kami</span>
+            <span class="nav-link-inner--text">Riwayat Transaksi</span>
           </a>
         </li>
       </ul>
@@ -82,18 +76,12 @@
             </div>
           </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-icon" href="#" data-toggle="tooltip" title="Notification">
-            <i class="fa fa-bell"></i>
-            <span class="nav-link-inner--text d-lg-none">Notification</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-icon" href="#" data-toggle="tooltip" title="Email">
-            <i class="fa fa-envelope"></i>
-            <span class="nav-link-inner--text d-lg-none">Email</span>
-          </a>
-        </li>
+        <!--<li class="nav-item">-->
+        <!--  <a class="nav-link nav-link-icon" href="#" data-toggle="tooltip" title="Notification">-->
+        <!--    <i class="fa fa-bell"></i>-->
+        <!--    <span class="nav-link-inner--text d-lg-none">Notification</span>-->
+        <!--  </a>-->
+        <!--</li>-->
 
         @auth()     
           <li class="nav-item dropdown">
@@ -103,7 +91,7 @@
             </a>
             <div class="dropdown-menu">
               <!--<a href="{{route('member')}}" class="dropdown-item">Member Area</a>-->
-              <a href="{{route('history')}}" class="dropdown-item">Riwayat Transaksi</a>
+              <!--<a href="{{route('history')}}" class="dropdown-item">Riwayat Transaksi</a>-->
               <a href="{{route('logout')}}" class="dropdown-item">Keluar</a>
             </div>
           </li>
@@ -117,14 +105,6 @@
           </li>      
         @endguest
         
-        <!-- <li class="nav-item d-none d-lg-block">
-          <a href="https://www.creative-tim.com/product/argon-design-system-pro?ref=ads-upgrade-pro" target="_blank" class="btn btn-primary btn-icon">
-            <span class="btn-inner--icon">
-              <i class="fa fa-shopping-cart"></i>
-            </span>
-            <span class="nav-link-inner--text">Upgrade to PRO</span>
-          </a>
-        </li> -->
       </ul>
     </div>
   </div>

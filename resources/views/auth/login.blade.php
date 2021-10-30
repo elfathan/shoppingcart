@@ -70,7 +70,7 @@
           </div>
           <div class="row mt-3">
             <div class="col-6">
-              <a href="#" class="text-primary"><small>Lupa Kata Sandi?</small></a>
+              <!--<a href="#" class="text-primary"><small>Lupa Kata Sandi?</small></a>-->
             </div>
             <div class="col-6 text-right">
               <a href="{{route('register')}}" class="text-primary"><small>Belum punya akun? Daftar</small></a>
@@ -142,7 +142,7 @@
                           } else if (res.message == 'inactive') {
                               document.getElementById("loginProcess").disabled = false;
                               $('#loginProcess').html('Masuk');
-                              swal("Error!", "Your account is no longer active!", "error");
+                              swal("Error!", "Akun Anda sudah tidak aktif!", "error");
                           } else {
                               document.getElementById("loginProcess").disabled = false;
                               $('#loginProcess').html('Masuk');
@@ -154,7 +154,7 @@
                           document.getElementById("loginProcess").disabled = false;
                           $('#loginProcess').html('Masuk');
 
-                          swal("Error!", "Request time out!");
+                          swal("Error!", "Email atau password salah!", "error");
                           // setTimeout(function(){ location.reload(); }, 1500);
                       }
                   });

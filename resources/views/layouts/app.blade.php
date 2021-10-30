@@ -30,7 +30,6 @@
   <div class="wrapper">
     @yield('content')
 
-    @include('footers.footer')
   </div>
 
   <!--   Core JS Files   -->

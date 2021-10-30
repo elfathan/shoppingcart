@@ -27,9 +27,22 @@
                 <input type="text" name="phone" class="form-control" placeholder="Nomor Hanphone" value="{{ $member->phone }}">
               </div>
               <div class="row align-items-center" style="padding: 0 20px 20px">
-                <textarea name="address" class="form-control" id="address" placeholder="Alamat"></textarea>
+                <textarea name="address" class="form-control mb-4" id="address" placeholder="Alamat"></textarea>
                 <div id="map_canvas">
                 </div>
+                
+                <iframe 
+                  id="iframeMap"
+                  width="100%" 
+                  height="270" 
+                  frameborder="0" 
+                  scrolling="yes" 
+                  marginheight="0" 
+                  marginwidth="0" 
+                  src="https://maps.google.com/maps?q=-6.2084362,106.7824544&hl=es&z=14&amp;output=embed"
+                 >
+                </iframe>
+                 
                 <a class="btn bt-sm btn-info" id="getAddress" style="width: 100%; cursor: pointer; margin-top: 20px">
                       <span class="nav-link-inner--text text-white">Dapatkan Alamat</span>
                   </a>
@@ -204,6 +217,38 @@
             
         });
         
+        // $('body').on('click', '#getAddress', function (event) {
+        //     event.preventDefault();
+            
+            if(geo_position_js.init()){
+    			geo_position_js.getCurrentPosition(success_callback,error_callback,{enableHighAccuracy:true});
+    		} else {
+    			alert("Functionality not available");
+    		}
+    
+    		function success_callback(p) {
+    // 			geo_position_js.showMap(p.coords.latitude,p.coords.longitude);
+    
+                latitude=p.coords.latitude;
+                longitude=p.coords.longitude;
+                
+                // document.getElementById("iframeMap").src = "https://maps.google.com/maps?q="+latitude+"."+longitude+"&hl=es&z=14&amp;output=embed";
+
+                pesan='posisi:'+latitude+','+longitude;
+                // pesan = pesan + '<br/>';
+                // pesan = pesan + "<img src='https://maps.googleapis.com/maps/api/staticmap?size=400×400&amp;zoom=13&amp;markers=color:red%7Clabel:C%7C"+latitude +","+longitude+"'/>";
+                // pesan = pesan + '<img src="https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&size=600x400"/>'
+                div_isi = document.getElementById("map_canvas");
+                //alert(pesan);
+                div_isi.innerHTML = pesan;
+    		}
+    		
+    		function error_callback(p){
+    			alert('error='+p.message);
+    		}
+        // });
+        
+        
         $('body').on('click', '#getAddress', function (event) {
             event.preventDefault();
             
@@ -215,16 +260,6 @@
     
     		function success_callback(p) {
     			geo_position_js.showMap(p.coords.latitude,p.coords.longitude);
-                // latitude=p.coords.latitude;
-                // longitude=p.coords.longitude;
-
-                // pesan='posisi:'+latitude+','+longitude;
-                // pesan = pesan + '<br/>';
-                // // pesan = pesan + "<img src='https://maps.googleapis.com/maps/api/staticmap?size=400×400&amp;zoom=13&amp;markers=color:red%7Clabel:C%7C"+latitude +","+longitude+"'/>";
-                // pesan = pesan + '<img src="https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&size=600x400"/>'
-                // div_isi = document.getElementById("div_isi");
-                // //alert(pesan);
-                // div_isi.innerHTML = pesan;
     		}
     		
     		function error_callback(p){
