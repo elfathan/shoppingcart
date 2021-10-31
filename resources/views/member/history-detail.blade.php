@@ -59,12 +59,12 @@
             
             <div style="margin-top: 20px">
                 <b>Nama Penerima</b>
-                <b style="font-size: 14px; float: right" class="display-3">{{$member->name}}</b>
+                <b style="font-size: 14px; float: right" class="display-3">{{$name}}</b>
             </div>
             
             <div>
                 <b>No. Handphone</b>
-                <b style="font-size: 14px; float: right" class="display-3">{{$member->phone}}</b>
+                <b style="font-size: 14px; float: right" class="display-3">{{$phone}}</b>
             </div>
             
             <div>

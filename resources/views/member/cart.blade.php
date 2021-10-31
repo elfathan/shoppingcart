@@ -43,13 +43,13 @@
                     </a>
                     <p>Rp {{number_format($cart->product->price)}}</p>
                     <div class="row align-items-center">
-                      <a class="btn bt-sm btn-primary" style="height: 30px; line-height: 10px; margin-left: 15px; cursor: pointer" id="reduceQty" data-id="{{$cart->id}}">
+                      <a class="btn bt-sm btn-primary" style="height: 30px; line-height: 10px; margin-left: 15px; cursor: pointer" id="reduceQty" data-id="{{$cart->id .'/'. $cart->product->id}}">
                         <span class="nav-link-inner--text text-white" id="reduceProcess{{$cart->id}}">-</span>
                       </a>
                       <div style="height: 30px; line-height: 15px; width: 50px; text-align: center; background: #f5f5f5">
                         <p>{{$cart->qty}}</p>
                       </div>
-                      <a class="btn bt-sm btn-primary" style="height: 30px; line-height: 10px; margin-left: 10px; cursor: pointer" id="addQty" data-id="{{$cart->id}}">
+                      <a class="btn bt-sm btn-primary" style="height: 30px; line-height: 10px; margin-left: 10px; cursor: pointer" id="addQty" data-id="{{$cart->id .'/'. $cart->product->id}}">
                         <span class="nav-link-inner--text text-white" id="addProcess{{$cart->id}}">+</span>
                       </a>
                     </div>
@@ -113,19 +113,20 @@
             
             $('body').on('click', '#reduceQty', function (event) {
                 event.preventDefault();
-                var id = $(this).data('id');
+                var id = $(this).data('id').split('/')[0];
                 
                 document.getElementById("reduceProcess" + id).disabled = true;
                 $('#reduceProcess' + id).html('Tunggu...');
 
                 var datas = {
-                    'id': $(this).data('id'),
+                    'id': $(this).data('id').split('/')[0],
+                    'id_product': $(this).data('id').split('/')[1]
                 };
 
                 $.post('reduce.qty.cart', datas, function (data) {
                     document.getElementById("reduceProcess" + id).disabled = false;
                     $('#reduceProcess' + id).html('-');
-                              
+                    
                     swal("Qty berhasil dikurangi", {
                         icon: "success",
                     });
@@ -135,23 +136,28 @@
             
             $('body').on('click', '#addQty', function (event) {
                 event.preventDefault();
-                var id = $(this).data('id');
+                var id = $(this).data('id').split('/')[0];
                 
                 document.getElementById("addProcess" + id).disabled = true;
                 $('#addProcess' + id).html('Tunggu...');
 
                 var datas = {
-                    'id': $(this).data('id'),
+                    'id': $(this).data('id').split('/')[0],
+                    'id_product': $(this).data('id').split('/')[1]
                 };
 
                 $.post('add.qty.cart', datas, function (data) {
                     document.getElementById("addProcess" + id).disabled = false;
                     $('#addProcess' + id).html('+');
                               
-                    swal("Qty berhasil ditambah", {
-                        icon: "success",
-                    });
-                    setTimeout(function(){ window.location.replace("cart"); }, 500);
+                    if (data.message == 'error') {
+                        swal("Error!", "Stok tidak cukup!", "error");
+                    } else {
+                        swal("Qty berhasil ditambahkan", {
+                            icon: "success",
+                        });
+                        setTimeout(function(){ window.location.replace("cart"); }, 500);
+                    }
                 })
             });
 

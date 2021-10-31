@@ -81,7 +81,15 @@ class CartController extends Controller
     }
     
     public function addQty(Request $request) {
+        $product = Product::where('id', $request->id_product)->first();
         $cart = Cart::where('id', $request->id)->first();
+        
+        if ($product->stock == $cart->qty) {
+            return response()->json([
+                'message' => 'error',
+                'data' => []
+            ]);
+        }
         
         $data = [
             'qty' => $cart->qty + 1,
@@ -133,9 +141,18 @@ class CartController extends Controller
         $transaction = Transaction::where('id', $id)->first();
         $subtotal = $transaction->subtotal;
         
-        $address = UserAddress::where('id_customer', Auth::user()->id)->first();
-        $address = $address->address;
+        $userAddress = UserAddress::where('id_transaction', $id)->first();
         
-        return view('member/history-detail', compact('carts', 'subtotal', 'address'));
+        if($userAddress) {
+            $name = $userAddress->name;
+            $phone = $userAddress->phone;
+            $address = $userAddress->address;
+        } else {
+            $name = '-';
+            $phone = '-';
+            $address = '-';
+        }
+        
+        return view('member/history-detail', compact('carts', 'subtotal', 'name', 'phone', 'address'));
     }
 }
